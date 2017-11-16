@@ -31,7 +31,7 @@ navs:
     label: 首页
 
   -
-    href: /category/
+    href: /categories/
     label: 分类
 
   -
