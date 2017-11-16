@@ -2,12 +2,12 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: http://mazhuang.org
+url: http://andevele.com
 date_format: "ordinal"
-title: 码志
-subtitle: "打码改变人生"
-description: "马壮的个人博客"
-keywords: 码志, Zhuang Ma, mzlogin, mazhuang
+title: andevele
+subtitle: "行百里者半九十"
+description: "andevele的个人博客"
+keywords: andevele, zhulf
 favicon: /favicon.ico
 timezone: Asia/Shanghai
 encoding: "utf-8"
