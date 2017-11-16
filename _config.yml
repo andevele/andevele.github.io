@@ -77,7 +77,7 @@ collections:
         output: true
         permalink: /wiki/:path/
 
-repository: mzlogin/mzlogin.github.io
+repository: andevele/andevele.github.io
 
 # ---------------- #
 #      Socials     #
