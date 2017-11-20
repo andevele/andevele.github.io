@@ -13,7 +13,7 @@ permalink: /timeline/
 <li class="posts-list-item">
 	<div class="timeline-content">
 		<span class="timeline-list-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
-		<a class="timeline-list-name bubble-float-left" href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+		<a class="timeline-list-name" href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
 		<span class='circle'></span>
 	</div>
 </li>
