@@ -31,11 +31,11 @@ comments: false
   -->
 
 <section class="arcitle-container content">
-	    <div class="column-sidebar one-third">
+	      <div class="column-sidebar one-fourth">
             {% include sidebar-search.html %}
-           <!-- {% include sidebar-popular-repo.html %} -->
+            {% include sidebar-popular-repo.html %}
         </div>
-        <div class="column-article two-thirds" >
+        <div class="column-article three-fourths" >
             <ol class="repo-list">
                 {% for post in paginator.posts %}
                 <li class="repo-list-item">

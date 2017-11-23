@@ -16,9 +16,13 @@ layout: default
 -->
 
 
-<section class="container content">
+<section class="arcitle-container content">
     <div class="columns">
-        <div class="column three-fourths" >
+        <div class="column-sidebar one-fourth">
+            {% include sidebar-search.html %}
+            {% include sidebar-categories-nav.html %}
+        </div>
+        <div class="column-article three-fourths" >
             <article class="article-content markdown-body">
                 {{ content }}
             </article>
@@ -28,10 +32,6 @@ layout: default
             <div class="comment">
                 {% include comments.html %}
             </div>
-        </div>
-        <div class="column one-fourth">
-            {% include sidebar-search.html %}
-            {% include sidebar-categories-nav.html %}
         </div>
     </div>
 </section>
