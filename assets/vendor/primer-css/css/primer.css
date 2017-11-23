@@ -404,10 +404,16 @@ pre {
     content: ""
 }
 
-.column {
+.column-sidebar {
     float: left;
     padding-right: 10px;
     padding-left: 0px
+}
+
+.column-article {
+    float: left;
+    padding-right: 10px;
+    padding-left: 60px
 }
 
 .one-third {

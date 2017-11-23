@@ -31,12 +31,11 @@ comments: false
   -->
 
 <section class="arcitle-container content">
-    <div class="columns">
-	    <div class="column one-third">
+	    <div class="column-sidebar one-third">
             {% include sidebar-search.html %}
             {% include sidebar-popular-repo.html %}
         </div>
-        <div class="column two-thirds" >
+        <div class="column-article two-thirds" >
             <ol class="repo-list">
                 {% for post in paginator.posts %}
                 <li class="repo-list-item">
@@ -62,7 +61,6 @@ comments: false
             </ol>
         </div>
 
-    </div>
     <div class="pagination text-align">
       <div class="btn-group">
         {% if paginator.previous_page %}
