@@ -1562,8 +1562,9 @@ input::-webkit-inner-spin-button {
 }
 
 .btn-group {
-    display: inline-block;
-    vertical-align: middle
+    width: 50%;
+    vertical-align: middle;
+    margin: 0 auto;
 }
 
 .btn-group:before {
