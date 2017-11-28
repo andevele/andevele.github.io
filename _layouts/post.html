@@ -28,21 +28,47 @@ layout: default
 <!-- / .banner -->
 <section class="container content">
 <div class="columns">
-  <div class="column three-fourths" >
+  <div class="column-sidebar one-fourth">
+    {% include sidebar-search.html %}
+    {% include sidebar-post-nav.html %}
+  </div>
+  <div class="column-article three-fourths" >
     <article class="article-content markdown-body">
     {{ content }}
     </article>
     <div class="share">
-      {% include sns-share.html %}
+      <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_ydnote"></a>
+<a class="jiathis_button_fb"></a>
+<a class="jiathis_button_twitter"></a>
+<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	summary:"",
+	ralateuid:{
+		"tsina":"2268025883"
+	},
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
     </div>
     <div class="comment">
-      {% include comments.html %}
+      <!-- UY BEGIN -->
+		<div id="uyan_frame"></div>
+			<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2150608"></script>
+		<!-- UY END -->
     </div>
   </div>
-  <div class="column one-fourth">
-    {% include sidebar-search.html %}
-    {% include sidebar-post-nav.html %}
-  </div>
+
 </div>
 </section>
 <!-- /section.content -->
