@@ -1,0 +1,35 @@
+---
+layout: default
+---
+<!--  this is link banner code, you can remove this annotation to display it. 2017-11-22
+<section class="collection-head small geopattern" data-pattern-id="{{ page.title | truncate: 15}}">
+    <div class="container">
+        <div class="collection-title">
+            <h1 class="collection-header">{{ page.title }}</h1>
+            {% if page.subtitle %}
+                <div class="collection-info">
+                    <span class="meta-info">
+                        {{ page.subtitle}}
+                    </span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+-->
+<!-- / .banner -->
+ <section class="arcitle-container content">
+        <div class="columns">
+            <!--
+            <div class="column-sidebar one-third">
+                {% include sidebar-search.html %}
+                {% include sidebar-popular-repo.html %}
+            </div> -->
+            <div class="column-resouce" >
+                <article class="article-content markdown-body">
+                    {{ content }}
+                </article>
+            </div>
+        </div>
+    </section>
+    <!-- /section.content -->
