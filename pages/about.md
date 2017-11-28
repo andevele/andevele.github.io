@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: about
 title: About
 description: 关于我
 keywords: Zhuang Ma, 马壮
