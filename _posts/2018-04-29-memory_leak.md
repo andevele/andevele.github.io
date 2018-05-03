@@ -6,15 +6,15 @@ description: 描述了Android app中内存泄漏常见的问题并给出优化�
 keywords: 内存泄漏, memory leak
 ---
 
-&emsp;&emsp;内存泄漏(memory leak)在app开发中可能经常遇到，但不易被发现，因为少数的泄漏并不会引起系统直接崩溃。但频繁地操作或日积月累后引起内存溢出，从而出现app卡死或者直接退出的现象。因此，充分了解内存泄漏并给出优化对app性能来说非常重要。
+&emsp;&emsp;内存泄漏(memory leak)在app开发中可能经常遇到，但不一定立即带来直接的危害，因为少数的泄漏并不会直接导致系统崩溃。但频繁地操作或日积月累后导致更多的内存无法释放，从而引起内存溢出，出现app卡死或者系统崩溃。因此，了解内存泄漏并给出优化对app性能来说非常重要。
 
 
 #### 定义
-不再被使用的对象持续占有内存或无用对象的内存得不到及时释放，从而造成内存空间的浪费称为内存泄漏。简单地说，不再被使用的对象的内存不能被回收就会引起内存泄漏。
-Android内存泄漏常见的场合：
+不再被使用的对象持续占有内存或无用对象的内存得不到及时释放，从而造成内存空间的浪费称为内存泄漏。简单地说，不再被使用的对象的内存不能被回收引起内存泄漏。
+Android常见内存泄漏：
 * 静态变量
-* Handler的使用
 * 线程
+* Handler的使用
 * bitmap
 * 单例模式
 * 属性动画
@@ -126,15 +126,65 @@ mContext右边的一串字符
 ``` java
 class leak.com.zhulf.www.memoryleak.MainActivity @ 0x12cef000
 ```
-表示该mContext变量属于MainActivity这个类的，代码中可以看到mContext是MainActivity重视声明的静态变量。如果mContext是其他类中
+表示该mContext变量属于MainActivity这个类的，代码中可以看到mContext是MainActivity声明的静态变量。如果mContext是其他类中
 声明的静态变量，那么右边一串字符就会是其他类的名称。
 
 解决方法  
 把mContext改成实例变量，当对象退出时实例变量都会被回收。尽量不要用静态变量引用实例对象，很容易导致泄漏。
 此时再用MAT测试一下，排除弱引用和弱引用后发现该对象没有被其他变量引用。
 
-##### Handler的使用
+##### 线程
+Activity中使用线程不当也会带来内存泄漏，看一个例子
+``` java
+package leak.com.zhulf.www.memoryleak;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+    private Button btnStart;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        btnStart = (Button) findViewById(R.id.btn_start);
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+		new Thread(new InnerThread()).start();
+    }
+
+    private class InnerThread implements Runnable {
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(100000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+```
+启动MainActivity同时启动线程，线程等待100s，然后单击按钮销毁MainActivity，但MainActivity并没有销毁，为何？用上一节提到的查看堆大小的方式发现存在内存泄漏，再用MAT查看泄漏原因
+
+![](/images/posts/android/post2_memory_leak/thread_leak.png 'MAT抓取线程泄漏')
+
+根据内部类的特点，内部类会持有一个指向外部类对象的引用。如上图，InnerThread就是内部类，this$0就代表指向外部类对象的引用。第三行的taget就是线程对象持有内部类InnerThread的一个引用。活着的线程被认为是GC ROOTS，被GC ROOTS直接引用或者间接引用的对象是不能被释放的。当前线程持有了一个InnerThread对象引用，而InnerThread对象又持有一个MainActivity对象引用，导致MainActivity没有释放。
+解决方法
+* 把InnerThread修改成静态内部类，根据java内部类特性，静态内部类不持有外部类引用
+* 把InnerThread作为外部类使用
 
 
 
